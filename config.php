@@ -21,10 +21,8 @@ try {
 	$ts3_VirtualServer = TeamSpeak3::factory("serverquery://".$config["login_name"].":".$config["login_password"]."@".$config["ip"].":".$config["query_port"]."/?server_port=".$config["server_port"]."&blocking=0&nickname=".urlencode($config["bot_nickname"]." - ".rand(1,1000)));
 	foreach ($ts3_VirtualServer->clientList() as $client) {
 		if ($client->getProperty('connection_client_ip') == $_SERVER["REMOTE_ADDR"]) {
-			$client_nickname = $client->client_nickname;
-			$client_uid = $client["client_unique_identifier"];
-			$_SESSION['client_uid'] = $client_uid;
-			$_SESSION['client_nickname'] = $client_nickname;
+			$_SESSION['client_nickname'] = $client->client_nickname;
+			$_SESSION['client_uid'] = $client["client_unique_identifier"];
 			$is_online++;
 		}
 	}
